@@ -36,12 +36,14 @@ services:
     volumes:
       - 'codiad_data:/bitnami/codiad'
       - 'apache_data:/bitnami/apache'
-
+      - 'php_data:/bitnami/php'
 volumes:
   codiad_data:
     driver: local
   apache_data:
     driver: local
+  php_data:
+    driver:local
 ```
 
 Launch the containers using:
@@ -56,8 +58,8 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Run the Codiad container:
 
-  ```
-  $ docker run -d -p 80:80 --name codiad bitnami/codiad
+  ```bash
+  $ docker run -d -p 80:80 -p 443:443 --name codiad bitnami/codiad:latest
   ```
 
 2. Access your application at http://your-ip/
@@ -84,8 +86,9 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/apache_data:/bitnami/apache'
-      - '/path/to/your/local/codiad_data:/bitnami/codiad'
+      - '/path/to/codiad-persistence:/bitnami/codiad'
+      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -94,9 +97,10 @@ services:
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name codiad \
-    --volume /path/to/your/local/apache_data:/bitnami/apache \
-    --volume /path/to/your/local/bitnami/codiad:/bitnami/codiad \
-    bitnami/codiad
+    --volume /path/to/codiad-persistence:/bitnami/codiad \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    bitnami/codiad:latest
   ```
 
 ### Mount plugins and themes directories as data volumes with Docker Compose
@@ -113,10 +117,11 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/your/local/apache_data:/bitnami/apache'
-      - '/path/to/your/local/codiad_data:/bitnami/codiad'
-      - '/path/to/your/local/themes:/opt/bitnami/codiad/themes'
-      - '/path/to/your/local/plugins:/opt/bitnami/codiad/plugins'
+      - '/path/to/codiad_persistence:/bitnami/codiad'
+      - '/path/to/apache-persistence:/bitnami/apache'
+      - '/path/to/php-persistence:/bitnami/php'
+      - '/path/to/themes-persistence:/opt/bitnami/codiad/themes'
+      - '/path/to/plugins-persistence:/opt/bitnami/codiad/plugins'
 ```
 
 Themes persistence require a few additional steps:
@@ -129,11 +134,12 @@ Themes persistence require a few additional steps:
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name codiad \
-    --volume /path/to/your/local/apache_data:/bitnami/apache \
-    --volume /path/to/your/local/bitnami/codiad:/bitnami/codiad \
-    --volume /path/to/your/local/themes:/opt/bitnami/codiad/themes \
-    --volume /path/to/your/local/plugins:/opt/bitnami/codiad/plugins \
-    bitnami/codiad
+    --volume /path/to/codiad-persistence:/bitnami/codiad \
+    --volume /path/to/apache-persistence:/bitnami/apache \
+    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/themes-persistence:/opt/bitnami/codiad/themes \
+    --volume /path/to/plugins-persistence:/opt/bitnami/codiad/plugins \
+    bitnami/codiad:latest
   ```
 
 # Upgrading Codiad
@@ -182,6 +188,7 @@ $ docker pull bitnami/codiad:latest
   $ docker run -d --name codiad -p 80:80 -p 443:443 \
     --volume codiad_data:/bitnami/codiad \
     --volume apache_data:/bitnami/apache \
+    --volume php_data:/bitnami/php \
     bitnami/codiad:latest
   ```
 
@@ -218,11 +225,13 @@ services:
     volumes:
       - codiad_data:/bitnami/codiad
       - apache_data:/bitnami/apache
-
+      - php_data:/bitnami/php
 volumes:
   codiad_data:
     driver: local
   apache_data:
+    driver: local
+  php_data:
     driver: local
 ```
 
@@ -233,6 +242,7 @@ $ docker run -d --name codiad -p 80:80 -p 443:443 \
   --env CODIAD_PASSWORD=my_password \
   --volume codiad_data:/bitnami/codiad \
   --volume apache_data:/bitnami/apache \
+  --volume php_data:/bitnami/php \
   bitnami/codiad:latest
 ```
 
@@ -247,10 +257,11 @@ To backup your application data follow these steps:
   $ docker-compose stop codiad
   ```
 
-2. Copy the Codiad and Apache data
+2. Copy the Codiad, php and Apache data
   ```bash
   $ docker cp $(docker-compose ps -q codiad):/bitnami/codiad/ /path/to/backups/codiad/latest/
   $ docker cp $(docker-compose ps -q codiad):/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp $(docker-compose ps -q codiad):/bitnami/php/ /path/to/backups/phpOC/latest/
   ```
 
 3. Start the Codiad container
@@ -265,10 +276,11 @@ To backup your application data follow these steps:
   $ docker stop codiad
   ```
 
-2. Copy the Codiad and Apache data
+2. Copy the Codiad, php and Apache data
   ```bash
   $ docker cp codiad:/bitnami/codiad/ /path/to/backups/codiad/latest/
   $ docker cp codiad:/bitnami/apache/ /path/to/backups/apache/latest/
+  $ docker cp codiad:/bitnami/php/ /path/to/backups/php/latest/
   ```
 
 3. Start the Codiad container
@@ -289,20 +301,20 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-codiad/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`$ docker version`)
+- Output of `$ docker info`
+- Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
 
-Copyright (c) 2015-2016 Bitnami
+Copyright (c) 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
