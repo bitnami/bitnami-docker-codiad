@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r8
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=codiad \
-    BITNAMI_IMAGE_VERSION=2.7.5-r0 \
+    BITNAMI_IMAGE_VERSION=2.7.5-r1 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/git/bin:$PATH
 
 # System packages required
@@ -11,8 +11,8 @@ RUN install_packages libssl1.0.0 libaprutil1 libapr1 libc6 libuuid1 libexpat1 li
 
 # Additional modules required
 RUN bitnami-pkg unpack apache-2.4.25-0 --checksum 8b46af7d737772d7d301da8b30a2770b7e549674e33b8a5b07480f53c39f5c3f
-RUN bitnami-pkg install php-7.1.0-1 --checksum 069f80b98b29998601f10685462b2f499cd95c5c56d036b4a3d2b5f64d310028
-RUN bitnami-pkg install libphp-7.1.0-0 --checksum 7ecdcdcfcedf67d67e46260f3669bb61c18a6e062c5576ce438270a39540c98a
+RUN bitnami-pkg unpack php-7.1.1-1 --checksum cc64828e801996f2f84d48814d8f74687ffbb0bb15f078586b2bf0a50371c7a9
+RUN bitnami-pkg install libphp-7.1.1-0 --checksum 44dcbd3692c4de97638bb8830619f3dbb555e59686804393cd0f2c6038fdcd31
 RUN bitnami-pkg install git-2.10.1-1 --checksum 454e9eb6fb781c8d492f9937439dcdfc1a931959d948d4c70e79716d2ea51a2b
 
 # Install codiad
