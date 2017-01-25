@@ -68,7 +68,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 ## Persisting your application
 
-For persistence of the Codiad deployment, the above examples define docker volumes namely `codiad_data` and `apache_data`. The Codiad application state will persist as long as these volumes are not removed.
+For persistence of the Codiad deployment, the above examples define docker volumes, namely `codiad_data` and `apache_data`. The Codiad application state will persist as long as these volumes are not removed.
 
 If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -276,7 +276,7 @@ To backup your application data follow these steps:
   $ docker stop codiad
   ```
 
-2. Copy the Codiad, php and Apache data
+2. Copy the Codiad, PHP and Apache data
   ```bash
   $ docker cp codiad:/bitnami/codiad/ /path/to/backups/codiad/latest/
   $ docker cp codiad:/bitnami/apache/ /path/to/backups/apache/latest/
