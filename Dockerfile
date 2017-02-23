@@ -1,4 +1,4 @@
-FROM gcr.io/stacksmith-images/minideb:jessie-r8
+FROM gcr.io/stacksmith-images/minideb:jessie-r10
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
@@ -19,6 +19,15 @@ RUN bitnami-pkg install git-2.10.1-1 --checksum 454e9eb6fb781c8d492f9937439dcdfc
 RUN bitnami-pkg unpack codiad-2.7.5-0 --checksum b1c1a0cbfdb7f5d7a82d7ec42e732b1a5c24a145f80cb8f37b8180b00fb0ade1
 
 COPY rootfs /
+
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    CODIAD_USERNAME="user" \
+    CODIAD_PASSWORD="bitnami" \
+    CODIAD_PROJECT_NAME="Sample Project" \
+    CODIAD_PROJECT_PATH="sampleProject" \
+    CODIAD_THEME="default" \
+    CODIAD_HOST="127.0.0.1"
 
 VOLUME ["/bitnami/codiad", "/bitnami/apache"]
 
