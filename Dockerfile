@@ -20,6 +20,15 @@ RUN bitnami-pkg unpack codiad-2.7.5-0 --checksum b1c1a0cbfdb7f5d7a82d7ec42e732b1
 
 COPY rootfs /
 
+ENV APACHE_HTTP_PORT="80" \
+    APACHE_HTTPS_PORT="443" \
+    CODIAD_USERNAME="user" \
+    CODIAD_PASSWORD="bitnami" \
+    CODIAD_PROJECT_NAME="Sample Project" \
+    CODIAD_PROJECT_PATH="sampleProject" \
+    CODIAD_THEME="default" \
+    CODIAD_HOST="127.0.0.1"
+
 VOLUME ["/bitnami/codiad", "/bitnami/apache"]
 
 EXPOSE 80 443
