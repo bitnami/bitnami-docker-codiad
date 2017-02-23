@@ -3,7 +3,7 @@ FROM gcr.io/stacksmith-images/minideb:jessie-r10
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=codiad \
-    BITNAMI_IMAGE_VERSION=2.7.5-r1 \
+    BITNAMI_IMAGE_VERSION=2.7.5-r2 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/git/bin:$PATH
 
 # System packages required
