@@ -3,7 +3,7 @@ FROM bitnami/minideb-extras:jessie-r13
 MAINTAINER Bitnami <containers@bitnami.com>
 
 ENV BITNAMI_APP_NAME=codiad \
-    BITNAMI_IMAGE_VERSION=2.7.5-r2 \
+    BITNAMI_IMAGE_VERSION=2.7.5-r3 \
     PATH=/opt/bitnami/php/bin:/opt/bitnami/apache/bin:/opt/bitnami/git/bin:$PATH
 
 # System packages required
