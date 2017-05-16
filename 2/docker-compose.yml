@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   codiad:
     image: 'bitnami/codiad:2'
