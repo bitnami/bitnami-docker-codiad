@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bitnami/bitnami-docker-codiad/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/bitnami-docker-codiad/tree/master)
-[![Slack](http://slack.oss.bitnami.com/badge.svg)](http://slack.oss.bitnami.com)
+[![Slack](https://img.shields.io/badge/slack-join%20chat%20%E2%86%92-e01563.svg)](http://slack.oss.bitnami.com)
 [![Kubectl](https://img.shields.io/badge/kubectl-Available-green.svg)](https://raw.githubusercontent.com/bitnami/bitnami-docker-codiad/master/kubernetes.yml)
 
 # What is Codiad?
@@ -13,15 +13,15 @@ http://codiad.com/
 ## Docker Compose
 
 ```bash
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-codiad/master/docker-compose.yml
-$ docker-compose up
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-codiad/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
 ```
 
 ## Kubernetes
 
 > **WARNING:** This is a beta configuration, currently unsupported.
 
-Get the raw URL pointing to the kubernetes.yml manifest and use kubectl to create the resources on your Kubernetes cluster like so:
+Get the raw URL pointing to the `kubernetes.yml` manifest and use `kubectl` to create the resources on your Kubernetes cluster like so:
 
 ```bash
 $ kubectl create -f https://raw.githubusercontent.com/bitnami/bitnami-docker-codiad/master/kubernetes.yml
@@ -55,16 +55,10 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'codiad_data:/bitnami/codiad'
-      - 'apache_data:/bitnami/apache'
-      - 'php_data:/bitnami/php'
+      - 'codiad_data:/bitnami'
 volumes:
   codiad_data:
     driver: local
-  apache_data:
-    driver: local
-  php_data:
-    driver:local
 ```
 
 Launch the containers using:
@@ -89,9 +83,11 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 ## Persisting your application
 
-For persistence of the Codiad deployment, the above examples define docker volumes, namely `codiad_data` and `apache_data`. The Codiad application state will persist as long as these volumes are not removed.
+If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-If avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume). Alternatively you can make use of volume plugins to host the volume data.
+For persistence you should mount a volume at the `/bitnami` path. The above examples define a docker volume namely `codiad_data`. The Codiad application state will persist as long as this volume is not removed.
+
+To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
@@ -107,9 +103,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/codiad-persistence:/bitnami/codiad'
-      - '/path/to/apache-persistence:/bitnami/apache'
-      - '/path/to/php-persistence:/bitnami/php'
+      - '/path/to/codiad-persistence:/bitnami'
 ```
 
 ### Mount host directories as data volumes using the Docker command line
@@ -118,9 +112,7 @@ services:
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name codiad \
-    --volume /path/to/codiad-persistence:/bitnami/codiad \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/codiad-persistence:/bitnami \
     bitnami/codiad:latest
   ```
 
@@ -138,14 +130,13 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/path/to/codiad_persistence:/bitnami/codiad'
-      - '/path/to/apache-persistence:/bitnami/apache'
-      - '/path/to/php-persistence:/bitnami/php'
+      - '/path/to/codiad_persistence:/bitnami'
       - '/path/to/themes-persistence:/opt/bitnami/codiad/themes'
       - '/path/to/plugins-persistence:/opt/bitnami/codiad/plugins'
 ```
 
 Themes persistence require a few additional steps:
+
   1. Codiad expects a theme by default (see the `CODIAD_THEME`) environment variable in the [environment variables](#environment-variables)). You can download it from the Codiad [GitHub repository](https://github.com/Codiad/Codiad/tree/master/themes)
   2. Place the downloaded theme at '/path/to/your/local/themes'. You should now have a '/path/to/your/local/themes/default' folder.
 
@@ -155,9 +146,7 @@ Themes persistence require a few additional steps:
 
   ```bash
   $ docker run -d -p 80:80 -p 443:443 --name codiad \
-    --volume /path/to/codiad-persistence:/bitnami/codiad \
-    --volume /path/to/apache-persistence:/bitnami/apache \
-    --volume /path/to/php-persistence:/bitnami/php \
+    --volume /path/to/codiad-persistence:/bitnami \
     --volume /path/to/themes-persistence:/opt/bitnami/codiad/themes \
     --volume /path/to/plugins-persistence:/opt/bitnami/codiad/plugins \
     bitnami/codiad:latest
@@ -167,55 +156,34 @@ Themes persistence require a few additional steps:
 
 Bitnami provides up-to-date versions of Codiad, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Codiad container.
 
-The `bitnami/codiad:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/codiad:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/codiad/tags/).
+1. Get the updated images:
 
-Get the updated image:
-
-```
+```bash
 $ docker pull bitnami/codiad:latest
 ```
 
-## Using Docker Compose
+2. Stop your container
 
-1. Stop the running Codiad container
-  ```bash
-  $ docker-compose stop codiad
-  ```
+ * For docker-compose: `$ docker-compose stop codiad`
+ * For manual execution: `$ docker stop codiad`
 
-2. Remove the stopped container
-  ```bash
-  $ docker-compose rm codiad
-  ```
+3. Take a snapshot of the application state
 
-3. Launch the updated Codiad image
-  ```bash
-  $ docker-compose start codiad
-  ```
+```bash
+$ rsync -a /path/to/codiad-persistence /path/to/codiad-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+```
 
-## Using Docker command line
+You can use this snapshot to restore the application state should the upgrade fail.
 
-1. Stop the running Codiad container
-  ```bash
-  $ docker stop codiad
-  ```
+4. Remove the stopped container
 
-2. Remove the stopped container
-  ```bash
-  $ docker rm codiad
-  ```
+ * For docker-compose: `$ docker-compose rm -v codiad`
+ * For manual execution: `$ docker rm -v codiad`
 
-3. Launch the updated Codiad image
-  ```bash
-  $ docker run -d --name codiad -p 80:80 -p 443:443 \
-    --volume codiad_data:/bitnami/codiad \
-    --volume apache_data:/bitnami/apache \
-    --volume php_data:/bitnami/php \
-    bitnami/codiad:latest
-  ```
+5. Run the new image
 
-> **NOTE**:
->
-> The above command assumes that local docker volumes are in use. Edit the command according to your usage.
+ * For docker-compose: `$ docker-compose start codiad`
+ * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name codiad bitnami/codiad:latest`
 
 # Configuration
 
@@ -244,15 +212,9 @@ services:
     environment:
       - CODIAD_PASSWORD=my_password
     volumes:
-      - codiad_data:/bitnami/codiad
-      - apache_data:/bitnami/apache
-      - php_data:/bitnami/php
+      - codiad_data:/bitnami
 volumes:
   codiad_data:
-    driver: local
-  apache_data:
-    driver: local
-  php_data:
     driver: local
 ```
 
@@ -261,57 +223,9 @@ volumes:
 ```bash
 $ docker run -d --name codiad -p 80:80 -p 443:443 \
   --env CODIAD_PASSWORD=my_password \
-  --volume codiad_data:/bitnami/codiad \
-  --volume apache_data:/bitnami/apache \
-  --volume php_data:/bitnami/php \
+  --volume codiad_data:/bitnami \
   bitnami/codiad:latest
 ```
-
-# Backing up your application
-
-To backup your application data follow these steps:
-
-## Backing up using Docker Compose
-
-1. Stop the Codiad container:
-  ```bash
-  $ docker-compose stop codiad
-  ```
-
-2. Copy the Codiad, php and Apache data
-  ```bash
-  $ docker cp $(docker-compose ps -q codiad):/bitnami/codiad/ /path/to/backups/codiad/latest/
-  $ docker cp $(docker-compose ps -q codiad):/bitnami/apache/ /path/to/backups/apache/latest/
-  $ docker cp $(docker-compose ps -q codiad):/bitnami/php/ /path/to/backups/phpOC/latest/
-  ```
-
-3. Start the Codiad container
-  ```bash
-  $ docker-compose start codiad
-  ```
-
-## Backing up using the Docker command line
-
-1. Stop the Codiad container:
-  ```bash
-  $ docker stop codiad
-  ```
-
-2. Copy the Codiad, PHP and Apache data
-  ```bash
-  $ docker cp codiad:/bitnami/codiad/ /path/to/backups/codiad/latest/
-  $ docker cp codiad:/bitnami/apache/ /path/to/backups/apache/latest/
-  $ docker cp codiad:/bitnami/php/ /path/to/backups/php/latest/
-  ```
-
-3. Start the Codiad container
-  ```bash
-  $ docker start codiad
-  ```
-
-# Restoring a backup
-
-To restore your application using backed up data simply mount the folder with Codiad and Apache data in the container. See [persisting your application](#persisting-your-application) section for more info.
 
 # Contributing
 
@@ -335,7 +249,7 @@ Discussions are archived at [bitnami-oss.slackarchive.io](https://bitnami-oss.sl
 
 # License
 
-Copyright (c) 2017 Bitnami
+Copyright 2017 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
