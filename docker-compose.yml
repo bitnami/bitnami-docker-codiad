@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   codiad:
     image: 'bitnami/codiad:latest'
@@ -8,10 +9,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'codiad_data:/bitnami/codiad'
-      - 'apache_data:/bitnami/apache'
+      - 'codiad_data:/bitnami'
 volumes:
   codiad_data:
-    driver: local
-  apache_data:
     driver: local
