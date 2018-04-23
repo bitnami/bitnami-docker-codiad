@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:jessie-r24
+FROM bitnami/minideb-extras:jessie-r28
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -10,11 +10,10 @@ RUN bitnami-pkg install libphp-7.1.16-0 --checksum 3cecd20b90ee37662a8fc14812ccb
 RUN bitnami-pkg unpack codiad-2.8.4-1 --checksum bfd25bf72154d13d064f4cd761ad1d9c6d48c7b37d28ca36ba96e2a5240d8be6
 
 COPY rootfs /
-
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="codiad" \
-    BITNAMI_IMAGE_VERSION="2.8.4-r4" \
+    BITNAMI_IMAGE_VERSION="2.8.4-r5" \
     CODIAD_HOST="127.0.0.1" \
     CODIAD_PASSWORD="bitnami" \
     CODIAD_PROJECT_NAME="Sample Project" \
