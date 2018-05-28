@@ -1,0 +1,8 @@
+{
+  "host": "{{$global.env.CODIAD_HOST}}",
+  "password": "{{$global.env.CODIAD_PASSWORD}}",
+  "projectName": "{{$global.env.CODIAD_PROJECT_NAME}}",
+  "projectPath": "{{$global.env.CODIAD_PROJECT_PATH}}",
+  "theme": "{{$global.env.CODIAD_THEME}}",
+  "username": "{{$global.env.CODIAD_USERNAME}}"
+}
