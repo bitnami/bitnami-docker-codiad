@@ -25,7 +25,7 @@ $ docker-compose up -d
 
 # Supported tags and respective `Dockerfile` links
 
-* [`2`, `2.8.4-r40`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-r40/2/Dockerfile)
+* [`2`, `2.8.4-r41`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-r41/2/Dockerfile)
 * [`2-ol-7`, `2.8.4-ol-7-r2` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-ol-7-r2/2/ol-7/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
@@ -177,7 +177,7 @@ You can use this snapshot to restore the application state should the upgrade fa
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose start codiad`
+ * For docker-compose: `$ docker-compose up codiad`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name codiad bitnami/codiad:latest`
 
 # Configuration
