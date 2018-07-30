@@ -29,7 +29,7 @@ $ docker-compose up -d
 
 
 * [`2-ol-7`, `2.8.4-ol-7-r29` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-ol-7-r29/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.8.4-debian-9-r14`, `2`, `2.8.4`, `2.8.4-r14`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-debian-9-r14/2/Dockerfile)
+* [`2-debian-9`, `2.8.4-debian-9-r15`, `2`, `2.8.4`, `2.8.4-r15`, `latest` (2/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-debian-9-r15/2/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
