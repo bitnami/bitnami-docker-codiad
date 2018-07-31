@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r92
+FROM bitnami/minideb-extras:stretch-r93
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -13,7 +13,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="codiad" \
-    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r15" \
+    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r16" \
     CODIAD_HOST="127.0.0.1" \
     CODIAD_PASSWORD="bitnami" \
     CODIAD_PROJECT_NAME="Sample Project" \
