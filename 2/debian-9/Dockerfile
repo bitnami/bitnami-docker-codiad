@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r93
+FROM bitnami/minideb-extras:stretch-r94
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,14 +6,14 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg install git-2.18.0-1 --checksum acf77a7b174b2b4201335fc400a4fa32dbdca237d18fa90a5fa76f4fd3008517
 RUN bitnami-pkg unpack apache-2.4.34-1 --checksum 35ab4cfd39577d1e7c5f6ef815ff27940add60ba498f7db7e558085de57b9ee3
 RUN bitnami-pkg unpack php-7.1.20-1 --checksum 5dc3991c54fef02b2c83dcd1ff703fb77919c54b7c44c2ff4b8ff6d53c8454eb
-RUN bitnami-pkg install libphp-7.1.20-0 --checksum e91120922fcdad4cb5856ae7c794d411c724e7d0b59cf6a7927f9e525e57690f
+RUN bitnami-pkg install libphp-7.1.20-1 --checksum 9135558c3f9fcf1de3392b7350400571543777554261b9b69af1131f28477765
 RUN bitnami-pkg unpack codiad-2.8.4-2 --checksum 2ee886a917afb016fc8e8de62ec8b1153cf2670a33350be177f54ffa9dd1a2e2
 
 COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="codiad" \
-    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r16" \
+    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r17" \
     CODIAD_HOST="127.0.0.1" \
     CODIAD_PASSWORD="bitnami" \
     CODIAD_PROJECT_NAME="Sample Project" \
