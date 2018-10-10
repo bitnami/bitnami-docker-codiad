@@ -22,6 +22,11 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * Bitnami images are built on CircleCI and automatically pushed to the Docker Hub.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
+
+[![Anchore Image Overview](https://anchore.io/service/badges/image/d802cab743d8eeb9edc42f2ea104c19c9c39e5888c90b4795afd53b3aa475acb)](https://anchore.io/image/dockerhub/bitnami%2Fcodiad%3Alatest#security)
+
+> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
 
 # Supported tags and respective `Dockerfile` links
 
@@ -31,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2-ol-7`, `2.8.4-ol-7-r61` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-ol-7-r61/2/ol-7/Dockerfile)
-* [`2-debian-9`, `2.8.4-debian-9-r43`, `2`, `2.8.4`, `2.8.4-r43`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-debian-9-r43/2/debian-9/Dockerfile)
+* [`2-debian-9`, `2.8.4-debian-9-r45`, `2`, `2.8.4`, `2.8.4-r45`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-debian-9-r45/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
