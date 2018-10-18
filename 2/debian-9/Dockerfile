@@ -6,14 +6,14 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg install git-2.19.1-1 --checksum 0ea45e1d5975f3cefe6e992079206e86ec66e1481b46f2c8d302ef57d2dc7397
 RUN bitnami-pkg unpack apache-2.4.35-2 --checksum 025a7e9c18433832a5818f81be1460708de1774d0cce9e67d45abdd63493a18c
 RUN bitnami-pkg unpack php-7.1.23-0 --checksum f7b1e5ccfd94938d0332805b2c05e5d1277234a56fa9d46edc58bb0ef3119581
-RUN bitnami-pkg unpack libphp-7.1.23-0 --checksum d5517e9a81b55fb42645f96cf36c171156ea314dae32322d112c96c84930e7bb
+RUN bitnami-pkg unpack libphp-7.1.23-1 --checksum 5850a9e5c1bf41b6d015a3083704539152c7c8a3a11af4c9ee222817fdefa75b
 RUN bitnami-pkg unpack codiad-2.8.4-4 --checksum 192dd4667c17ac3016f962a1fbd595a8afc77cea09b6e19f3c42f9b720d154f2
 
 COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="codiad" \
-    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r53" \
+    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r54" \
     CODIAD_HOST="127.0.0.1" \
     CODIAD_PASSWORD="bitnami" \
     CODIAD_PROJECT_NAME="Sample Project" \
