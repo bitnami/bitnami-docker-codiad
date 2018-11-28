@@ -1,0 +1,39 @@
+## This is test deployment for Kubernetes platforms.
+## This is _not_ intended to be use in producction.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-codiad
+  name: test-codiad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-codiad
+  template:
+    metadata:
+      labels:
+        app: test-codiad
+    spec:
+      containers:
+      - image: bitnami/codiad
+        name: codiad
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-codiad
+  name: test-codiad
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test-codiad
+  sessionAffinity: None
+  type: ClusterIP
+
