@@ -7,7 +7,7 @@ RUN bitnami-pkg install git-2.19.2-0 --checksum 24817a90223cfc91ce38cdc459dc6647
 RUN bitnami-pkg unpack apache-2.4.37-20 --checksum 810294929de06cf7019e88df932ce5776f4b49458914382cdd69cbe7d3acfc85
 RUN bitnami-pkg unpack php-7.1.25-20 --checksum b4350f7370f196def8ff56462d7efb4961c15f97a705b96211006a16cec02cac
 RUN bitnami-pkg unpack libphp-7.1.25-20 --checksum a399bce1ef71a9a8965abc499b5abed2bb7862e28136223ab0b87f689748f9e1
-RUN bitnami-pkg unpack codiad-2.8.4-5 --checksum 52b5078ff329a6494aa4b7055456888d8d083f073f8de3024fbcf8d793b038e2
+RUN bitnami-pkg unpack codiad-2.8.4-20 --checksum 47b69334c22da218fec768566f66cdb252151f5547f8f74e9dceda9c2cc8e921
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
 RUN ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -16,7 +16,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="codiad" \
-    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r98" \
+    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r99" \
     CODIAD_HOST="127.0.0.1" \
     CODIAD_PASSWORD="bitnami" \
     CODIAD_PROJECT_NAME="Sample Project" \
