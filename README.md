@@ -22,9 +22,8 @@ $ docker-compose up -d
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading linux distribution.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-[![Anchore Image Overview](https://anchore.io/service/badges/image/d802cab743d8eeb9edc42f2ea104c19c9c39e5888c90b4795afd53b3aa475acb)](https://anchore.io/image/dockerhub/bitnami%2Fcodiad%3Alatest#security)
 
-> The image overview badge contains a security report with all open CVEs. Click on 'Show only CVEs with fixes' to get the list of actionable security issues.
+> This [CVE scan report](https://quay.io/repository/bitnami/codiad?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 # How to deploy Codiad in Kubernetes?
 
@@ -45,7 +44,7 @@ $ kubectl apply -f test.yaml
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`2-ol-7`, `2.8.4-ol-7-r132` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-ol-7-r132/2/ol-7/Dockerfile)
+* [`2-ol-7`, `2.8.4-ol-7-r133` (2/ol-7/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-ol-7-r133/2/ol-7/Dockerfile)
 * [`2-debian-9`, `2.8.4-debian-9-r126`, `2`, `2.8.4`, `2.8.4-r126`, `latest` (2/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-codiad/blob/2.8.4-debian-9-r126/2/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
