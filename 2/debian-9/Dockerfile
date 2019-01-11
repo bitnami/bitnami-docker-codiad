@@ -1,4 +1,4 @@
-FROM bitnami/minideb-extras:stretch-r249
+FROM bitnami/minideb-extras:stretch-r250
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -6,7 +6,7 @@ RUN install_packages libbz2-1.0 libc6 libcomerr2 libcurl3 libexpat1 libffi6 libf
 RUN bitnami-pkg install git-2.20.1-20 --checksum eeb8a6101929fc294dcead9e97938af819d45eff53ca5f531285de4686f4151f
 RUN bitnami-pkg unpack apache-2.4.37-24 --checksum 19222f78a9c9e24beb85a625c118609ec16db55b17cc3092caa89a9866bbbe85
 RUN bitnami-pkg unpack php-7.1.25-21 --checksum 9c0ca4fc5ddafad98d27c94d459a921c1077139d5ece08198a6a48d18485fe13
-RUN bitnami-pkg unpack libphp-7.1.25-21 --checksum c55887490c4242caaf4a7a9abefefaff71b5413cec6965b1e08a2795e4aff167
+RUN bitnami-pkg unpack libphp-7.1.26-0 --checksum 762654f139d651bcc1bccbab211b1f366760f5af8b0bdb4153ff09188ace2288
 RUN bitnami-pkg unpack codiad-2.8.4-20 --checksum 47b69334c22da218fec768566f66cdb252151f5547f8f74e9dceda9c2cc8e921
 RUN mkdir -p /opt/bitnami/apache/tmp && chmod g+rwX /opt/bitnami/apache/tmp
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log
@@ -16,7 +16,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="codiad" \
-    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r134" \
+    BITNAMI_IMAGE_VERSION="2.8.4-debian-9-r135" \
     CODIAD_HOST="127.0.0.1" \
     CODIAD_PASSWORD="bitnami" \
     CODIAD_PROJECT_NAME="Sample Project" \
