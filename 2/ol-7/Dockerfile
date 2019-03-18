@@ -1,4 +1,4 @@
-FROM bitnami/oraclelinux-extras:7-r292
+FROM bitnami/oraclelinux-extras:7-r293
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 # Install required system packages and dependencies
@@ -16,7 +16,7 @@ COPY rootfs /
 ENV APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="codiad" \
-    BITNAMI_IMAGE_VERSION="2.8.4-ol-7-r199" \
+    BITNAMI_IMAGE_VERSION="2.8.4-ol-7-r200" \
     CODIAD_HOST="127.0.0.1" \
     CODIAD_PASSWORD="bitnami" \
     CODIAD_PROJECT_NAME="Sample Project" \
