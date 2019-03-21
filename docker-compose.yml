@@ -2,9 +2,7 @@ version: '2'
 
 services:
   codiad:
-    image: 'bitnami/codiad:latest'
-    labels:
-      kompose.service.type: nodeport
+    image: 'bitnami/codiad:2'
     ports:
       - '80:80'
       - '443:443'
