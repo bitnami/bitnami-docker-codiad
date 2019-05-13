@@ -1,4 +1,7 @@
 
+# DEPRECATION NOTICE
+ This image has been deprecated, and will no longer be maintained and updated.
+
 # What is Codiad?
 
 > Codiad is a web-based IDE framework with a small footprint and minimal requirements.
